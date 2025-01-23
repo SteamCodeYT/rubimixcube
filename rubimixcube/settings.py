@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-2-2j52yy^013nf@ce%_gq)tb8hl04_=24dm%e&4-xx$29pxu^6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['rubimixcube.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['rubimixcube.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -78,7 +78,10 @@ WSGI_APPLICATION = 'rubimixcube.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -117,7 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'mainapp/static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
